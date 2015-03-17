@@ -1,0 +1,314 @@
+/* .col-md-5, .col-md-4, .col-md-3
+{
+    border: black 1px solid;
+    height: 950px;
+}
+
+.col-md-12, #slider, .col-md-6
+{
+    border: black 1px solid;
+} */
+
+html
+{
+    position: relative;
+    min-height: 100%;
+}
+
+body
+{
+    margin-bottom: 60px;
+    font-size: 15px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.row
+{
+    padding: 10px;
+}
+
+@media (max-width: 500px)
+{
+    .row
+    {
+        padding: 0px;
+    }
+}
+
+#pool h1
+{
+    margin-bottom: 25px;
+}
+
+#pool h1 a img
+{
+    height: 80px;
+    width: 295px;
+}
+
+#pool #slider
+{
+    height: 125px;
+}
+
+#pool #countdown .col-md-6
+{
+    height: 100px;
+}
+
+#pool #countdown .rechts
+{
+    padding-left: 4.8%;
+    padding-right: 2.2%;
+}
+
+#pool #countdown .links
+{
+    padding-left: 2%;
+    padding-right: 4.8%;
+}
+
+@media (min-width: 1201px)
+{
+    #pool #countdown .rechts
+    {
+        padding-left: 7.5%;
+        padding-right: 2.2%;
+    }
+
+    #pool #countdown .links
+    {
+        padding-left: 2%;
+        padding-right: 7.5%;
+    }
+}
+
+#pool #countdown .countdownFeld
+{
+    height: 80px;
+    width: 80px;
+    margin: 5px auto 0 auto;
+    padding-top: 8px;
+    border-radius: 10px;
+    background-color: #ee7400;
+    text-align: center;
+}
+
+#pool #countdown .countdownFeld .timer
+{
+    font-size: 30px;
+    margin-bottom: 2px;
+}
+
+@media (min-width: 992px) and (max-width: 1200px)
+{
+
+
+    #pool #countdown .countdownFeld
+    {
+        height: 50px;
+        width: 50px;
+        font-size: 10px;
+    }
+
+    #pool #countdown .countdownFeld .timer
+    {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 1200px)
+{
+    #pool #countdown .rechts
+    {
+        padding: 0px;
+        padding-left: 9%;
+    }
+
+    #pool #countdown .links
+    {
+        padding: 0px;
+        padding-right: 9%;
+    }
+}
+
+#teilnehmen .formular
+{
+    height: 500px;
+    width: 100%;
+    max-width: 400px;
+    margin-top: 200px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 20px;
+    border-radius: 25px;
+    background-color: rgba(238, 116, 0, 0.3);
+}
+
+@media (max-width: 991px)
+{
+    #teilnehmen .formular
+    {
+        margin-top: 0px;
+    }
+
+    #teilnehmen .col-md-12, #teilnehmen
+    {
+        padding: 0px;
+    }
+}
+
+#teilnehmen .formular .input-group
+{
+    margin-bottom: 20px;
+}
+
+#teilnehmen .formular .input-group .eingabeBeschreibung
+{
+    min-width: 125px;
+}
+
+#erklaerung .banner
+{
+    max-width: 270px;
+    margin: 150px auto 0 auto;
+    padding: 10px;
+    border: 1px solid #cdcdcd;
+    font-family: Oswald, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #818181;
+    background-color: #fff;
+}
+
+@media (max-width: 991px)
+{
+    #erklaerung .banner
+    {
+        margin-top: 25px;
+    }
+}
+
+#erklaerung .banner h3
+{
+    margin: -10px;
+    margin-bottom: 0px;
+    padding: 10px;
+    color: #fff;
+    background-color: #cdcdcd;
+}
+
+#erklaerung .banner ul
+{
+    list-style-type: none;
+}
+
+#erklaerung .banner ul li
+{
+    margin-left: -50px;
+    padding: 4px 0 4px 20px;
+}
+
+#erklaerung .banner ul li:before
+{
+    display: inline-block;
+    content: "\f00c";
+    color: #8cba26;
+    width: 1.3em;
+    font-family: FontAwesome;
+}
+
+#erklaerung .banner ul li a
+{
+    color: inherit;
+    text-decoration: none;
+}
+
+#erklaerung .banner ul li a:hover
+{
+    color: #ee7400;
+}
+
+.footer
+{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    font-size: 12px;
+    background-color: #dadada;
+    color: #818181;
+}
+
+.footer p
+{
+    margin-bottom: 0px;
+    line-height: 40px;
+    text-align: center;
+}
+
+.footer p a
+{
+    color: inherit;
+    text-decoration: none;
+}
+
+.footer p a:hover
+{
+    color: #ee7400;
+}
+
+#background-image
+{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+}
+
+#background-image img
+{
+    height: 100%;
+    width: 100%;
+    filter: opacity(0.5) sepia(0.5);
+    -webkit-filter: opacity(0.5) sepia(0.5);
+}
+
+.progress
+{
+    position: relative;
+    background: rgba(245, 245, 245, 1);
+    border: 0px solid rgba(245, 245, 245, 1);
+    border-radius: 4px;
+    height: 20px;
+}
+
+.percent
+{
+    display: block;
+    width: 100%;
+    color: black;
+}
+
+#slider  .momentan
+{
+    text-align: right;
+    margin-bottom: 0px;
+}
+
+#slider .maximal
+{
+    margin-top: -20px;
+    text-align: right;
+}
+
+.progress-bar-custom
+{
+    background: rgba(137, 189, 35, 1);
+}
+
+.progress-striped .progress-bar-custom
+{
+    background-color: rgba(137, 189, 35, 1);
+    background-image: -webkit-gradient(linear,0 100%,100% 0,color-stop(0.25,rgba(238, 116, 0, 1),color-stop(0.25,transparent),color-stop(0.5,transparent),color-stop(0.5,rgba(238, 116, 0, 1)),color-stop(0.75,rgba(238, 116, 0, 1)),color-stop(0.75,transparent),to(transparent)));
+    background-image: -webkit-linear-gradient(45deg,rgba(238, 116, 0, 1) 25%,transparent 25%,transparent 50%,rgba(238, 116, 0, 1) 50%,rgba(238, 116, 0, 1) 75%,transparent 75%,transparent);
+    background-image: linear-gradient(45deg,rgba(238, 116, 0, 1) 25%,transparent 25%,transparent 50%,rgba(238, 116, 0, 1) 50%,rgba(238, 116, 0, 1) 75%,transparent 75%,transparent);
+    background-size: 40px 40px;
+}
