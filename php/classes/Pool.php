@@ -127,6 +127,14 @@ class Pool
         return $this->ziel;
     }
 
+    function getZielProzent($teilbetrag)
+    {
+        if ($this->erreicht + $teilbetrag > $thia->ziel)
+            return $this->ziel * 100 / ($this->erreicht + $teilbetrag) . "%";
+        else
+            return "100%";
+    }
+
     private function getZweistellig($variable)
     {
         return intval($variable / 10) . $variable % 10;

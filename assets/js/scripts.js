@@ -21,6 +21,16 @@ var momentan;
 var teilbetrag;
 var maximal;
 
+//Bezahlart
+var radioPaypal;
+var radioUeberweisung;
+var radioVisa;
+var radioMasterCard;
+var knotenPaypal;
+var knotenUeberweisung;
+var knotenVisa;
+var knotenMasterCard;
+
 
 window.onload = function()
 {
@@ -43,6 +53,22 @@ window.onload = function()
     momentan = parseFloat(knotenMomentan.innerHTML);
     maximal = parseFloat(knoten100Prozent.innerHTML);
     changeProzent();
+
+    //Bezahlart
+    radioPaypal = document.getElementById('bezahlArtPaypal');
+    radioUeberweisung = document.getElementById('bezahlArtSofortueberweisung');
+    radioVisa = document.getElementById('bezahlArtVisa');
+    radioMasterCard = document.getElementById('bezahlArtMasterCard');
+    knotenPaypal = document.getElementById('paypal');
+    knotenUeberweisung = document.getElementById('sofortueberweisung');
+    knotenVisa = document.getElementById('visa');
+    knotenMasterCard = document.getElementById('mastercard');
+
+    radioPaypal.addEventListener('change', showInputFelder);
+    radioUeberweisung.addEventListener('change', showInputFelder);
+    radioVisa.addEventListener('change', showInputFelder);
+    radioMasterCard.addEventListener('change', showInputFelder);
+    showInputFelder();
 }
 
 //Countdown
@@ -112,4 +138,54 @@ function changeProzent()
     knotenProgressbar[3].style.width = teilbetrag * 100 / teiler + "%";
     knoten100Prozent.style.width = maximal * 100 / teiler + "%";
     knotenMomentan.style.width = momentan * 100 / teiler + "%";
+}
+
+//Bezahlart
+function showInputFelder()
+{
+    if (radioPaypal.checked)
+    {
+        setClasses(knotenPaypal, "block");
+        setClasses(knotenUeberweisung, "none");
+        setClasses(knotenVisa, "none");
+        setClasses(knotenMasterCard, "none");
+        setClasses(knotenSubmit, "btn btn-default block");
+    }
+    else if (radioUeberweisung.checked)
+    {
+        setClasses(knotenPaypal, "none");
+        setClasses(knotenUeberweisung, "block");
+        setClasses(knotenVisa, "none");
+        setClasses(knotenMasterCard, "none");
+        setClasses(knotenSubmit, "btn btn-default block");
+    }
+    else if (radioVisa.checked)
+    {
+        setClasses(knotenPaypal, "none");
+        setClasses(knotenUeberweisung, "none");
+        setClasses(knotenVisa, "block");
+        setClasses(knotenMasterCard, "none");
+        setClasses(knotenSubmit, "btn btn-default block");
+    }
+    else if (radioMasterCard.checked)
+    {
+        setClasses(knotenPaypal, "none");
+        setClasses(knotenUeberweisung, "none");
+        setClasses(knotenVisa, "none");
+        setClasses(knotenMasterCard, "block");
+        setClasses(knotenSubmit, "btn btn-default block");
+    }
+    else
+    {
+        setClasses(knotenPaypal, "none");
+        setClasses(knotenUeberweisung, "none");
+        setClasses(knotenVisa, "none");
+        setClasses(knotenMasterCard, "none");
+        setClasses(knotenSubmit, "btn btn-default none");
+    }
+}
+
+function setClasses(knoten, classes)
+{
+    knoten.className = classes;
 }

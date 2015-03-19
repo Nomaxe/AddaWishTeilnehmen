@@ -1,168 +1,138 @@
 <?php
-/*
- * HCO testsystem gateway url
- */
-$url = "https://test-heidelpay.hpcgw.net/sgw/gtwu";
+
+//URL fuer Testsystem
+$url = "https://test-heidelpay.hpcgw.net/sgw/gtw";
+
+$parameters['SECURITY.SENDER'] = "31HA07BC8124AD82A9E96D9A35FAFD2A";
+$parameters['USER.LOGIN'] = "31ha07bc8124ad82a9e96d486d19edaa";
+$parameters['USER.PWD'] = "password";
+$parameters['TRANSACTION.CHANNEL'] = "31HA07BC81A71E2A47DA94B6ADC524D8";
+
+$parameters['ACCOUNT.HOLDER'] = $teilnehmer->getName();
+$parameters['ACCOUNT.NUMBER'] = $teilnehmer->getKreditKarteNummer();
+//$parameters['ACCOUNT.BRAND'] = "PAYPAL";
+$parameters['ACCOUNT.BRAND'] = "VISA";
+$parameters['ACCOUNT.EXPIRY_MONTH'] = $teilnehmer->getKreditKarteMonat();
+$parameters['ACCOUNT.EXPIRY_YEAR'] = $teilnehmer->getKreditKarteJahr();
+$parameters['ACCOUNT.VERIFICATION'] = $teilnehmer->getKreditKartePruefnummer();
+
+//Payment Code -- Auswahl Bezahlmethode und Typ
+//$parameters['PAYMENT.CODE'] = "DD.RG";  // Registrierung Lastschrift
+//$parameters['PAYMENT.CODE'] = "CC.RG";  // Registrierung Kreditkarte
+$parameters['PAYMENT.CODE'] = "CC.DB";  // Direkte Belastung
+//$parameters['PAYMENT.CODE'] = "CC.PA";  // Reservierende Buchung
+//$parameters['PAYMENT.CODE'] = "OT.PA";  // Sofort�berweisung, giropay
+//$parameters['PAYMENT.CODE'] = "VA.DB";  // Paypal
+$parameters['PRESENTATION.CURRENCY'] = "EUR";
+
+//Response URL angeben
+$parameters['FRONTEND.RESPONSE_URL'] = "192.168.178.41/teilnehmen/php/heidelpay/response-page.php";
+
+//CSS- und/oder Jscript-Datei angeben
+$parameters['FRONTEND.CSS_PATH'] = "http://127.0.0.1/Testskripte/onlycarddetails_new.css";
+//$parameters['FRONTEND.JSCRIPT_PATH'] = "http://127.0.0.1/wpf/wpfui.js";
+
+$parameters['PRESENTATION.AMOUNT'] = $teilnehmer->getTeilbetrag();
+//$parameters['PRESENTATION.AMOUNT'] = '5.2';
+$parameters['IDENTIFICATION.TRANSACTIONID'] = 'Heidelpay Testtransaktion vom: '.date("d.m.y - H:i:s");
+$parameters['PRESENTATION.USAGE'] = 'Testtransaktion vom '.date("d.m.Y");
+
+
+$parameters['FRONTEND.MODE'] = "DEFAULT";
+//$parameters['FRONTEND.MODE'] = "WPF_LIGHT";
+
+// Modus ausw�hlen
+//$parameters['TRANSACTION.MODE'] = "LIVE";
+//$parameters['TRANSACTION.MODE'] = "INTEGRATOR_TEST";
+$parameters['TRANSACTION.MODE'] = "CONNECTOR_TEST";
+
+
+$parameters['FRONTEND.ENABLED'] = "true";
+$parameters['FRONTEND.POPUP'] = "false";
+//$parameters['FRONTEND.SHOP_NAME'] = '';
+$parameters['FRONTEND.REDIRECT_TIME'] = "0";
+
+
+$parameters['FRONTEND.LANGUAGE_SELECTOR'] = "true";
+$parameters['FRONTEND.LANGUAGE'] = "de";
+
+$parameters['REQUEST.VERSION'] = "1.0";
 
 /*
- * Authentifizierung (kein Zugangsdaten zum Liveaccount) 
- */
-$parameters['SECURITY.SENDER'] 				= "31HA07BC810C91F08643A5D477BDD7C0";
-$parameters['USER.LOGIN'] 					= "31ha07bc810c91f086431f7471d042d6";
-$parameters['USER.PWD'] 					= "password";
-$parameters['TRANSACTION.CHANNEL'] 			= "31HA07BC810C91F086433734258F6628";
-$parameters['TRANSACTION.MODE'] 			= "CONNECTOR_TEST";
-
-/*
- * Betrag, Währung und Abbuchungstext
- */
-$parameters['IDENTIFICATION.TRANSACTIONID'] = 'Kunden- und / oder Bestellnummer';
-$parameters['PRESENTATION.USAGE'] 			= 'Abbuchungstext auf Lastschrift';
-$parameters['PAYMENT.CODE'] 				= "CC.DB";
-$parameters['PRESENTATION.AMOUNT'] 			= 1.99;
-$parameters['PRESENTATION.CURRENCY'] 		= "EUR";
-
-/*
- * Steuerung des Bezahlformulars
- */
-$parameters['FRONTEND.MODE'] 				= "DEFAULT";
-$parameters['FRONTEND.ENABLED'] 			= "true";
-$parameters['FRONTEND.POPUP'] 				= "false";
-$parameters['FRONTEND.REDIRECT_TIME'] 		= "0";
-$parameters['FRONTEND.LANGUAGE_SELECTOR'] 	= "false";
-$parameters['FRONTEND.LANGUAGE'] 			= "de";
-$parameters['FRONTEND.CSS_PATH'] 			= "https://test-heidelpay.hpcgw.net/sgw/css/hcoFastLane.css";
-// dies muss der Händler setzen
-$parameters['FRONTEND.RESPONSE_URL'] 		=  'http://localhost/teilnehmen/index.php/';
-
-/*
- * Kundendaten
- */
-$parameters['NAME.GIVEN'] 					= "Test";
-$parameters['NAME.FAMILY'] 					= "Developer";
-$parameters['ADDRESS.STREET'] 				= "Demostraße";
-$parameters['ADDRESS.ZIP'] 					= "12345";
-$parameters['ADDRESS.CITY'] 				= "Heidelberg";
-$parameters['ADDRESS.COUNTRY'] 				= "DE";
-$parameters['ADDRESS.STATE'] 				= "DE8";
-$parameters['CONTACT.EMAIL'] 				= "example@example.com";
-
-/*
- * Versionierung des Skripts
- */
-$parameters['REQUEST.VERSION'] 				= "1.0";
-
-/*
-* check response url
+$parameters['NAME.GIVEN'] = "";
+$parameters['NAME.FAMILY'] = "";
 */
-if ($parameters['FRONTEND.RESPONSE_URL']) 
+
+$parameters['NAME.GIVEN'] = "Markus";
+$parameters['NAME.FAMILY'] = "Mustermann";
+$parameters['ADDRESS.STREET'] = "Musterstrasse 1";
+$parameters['ADDRESS.ZIP'] = "12345";
+$parameters['ADDRESS.CITY'] = "Musterstadt";
+$parameters['ADDRESS.COUNTRY'] = "DE";
+//$parameters['ADDRESS.STATE'] = "";
+$parameters['CONTACT.EMAIL'] = "test@example.com";
+
+//building the postparameter string to send into the WPF
+
+$result = '';
+foreach ($parameters AS $key => $value)
+$result .= strtoupper($key).'='.urlencode($value).'&';
+$strPOST = stripslashes($result);
+
+//echo $strPOST;
+
+//open the request url for the Web Payment Frontend
+
+$cpt = curl_init();
+curl_setopt($cpt, CURLOPT_URL, $url);
+curl_setopt($cpt, CURLOPT_SSL_VERIFYHOST, 2);
+curl_setopt($cpt, CURLOPT_USERAGENT, "php ctpepost");
+curl_setopt($cpt, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($cpt, CURLOPT_SSL_VERIFYPEER, FALSE);
+curl_setopt($cpt, CURLOPT_POST, 1);
+curl_setopt($cpt, CURLOPT_POSTFIELDS, $strPOST);
+$curlresultURL = curl_exec($cpt);
+$curlerror = curl_error($cpt);
+$curlinfo = curl_getinfo($cpt);
+curl_close($cpt);
+
+
+// here you can get all variables returned from the ctpe server (see post integration transactions documentation for help)
+//print $strPOST;
+// parse results
+
+$r_arr=explode("&",$curlresultURL);
+foreach($r_arr AS $buf)
 {
-	/*
-	 * Generiere request String
-	 */
-	$nameValueArray = array();
-	foreach ($parameters AS $key => $value) {
-		$nameValuePair = strtoupper($key).'='.urlencode($value);
-		array_push($nameValueArray, $nameValuePair);
-	}
-	$keyValStr = stripslashes(implode('&', $nameValueArray));
-
-	/*
-	 * Sende request via curl
-	 */
-	$cpt = curl_init();
-	curl_setopt($cpt, CURLOPT_URL, $url);
-	curl_setopt($cpt, CURLOPT_USERAGENT, "hcoCall");
-	curl_setopt($cpt, CURLOPT_SSL_VERIFYHOST, 2);
-	curl_setopt($cpt, CURLOPT_SSL_VERIFYPEER, FALSE);
-	curl_setopt($cpt, CURLOPT_POST, 1);
-	curl_setopt($cpt, CURLOPT_POSTFIELDS, $keyValStr);
-	curl_setopt($cpt, CURLOPT_RETURNTRANSFER, 1);
-
-	$curlResultString 	= curl_exec($cpt);
-	$curlerror 			= curl_error($cpt);
-	$curlinfo 			= curl_getinfo($cpt);
-	curl_close($cpt);
-
-	$curlResponseArrayTmp  	= explode("&",$curlResultString);
-	$curlResponseArray 		= array();
-
-	foreach($curlResponseArrayTmp AS $responseKeyValPair)
-	{
-		$temp = urldecode($responseKeyValPair);
-		$temp = preg_split("#=#",$temp,2);
-
-		if (array_key_exists(0, $temp) && $temp[0]) {
-
-			$responseKey = $temp[0];
-			$responseValue = 'NO VALUE FOUND';
-			if ( array_key_exists('1', $temp) ) {
-				$responseValue = $temp[1];
-			}
-			$curlResponseArray[$responseKey]=$responseValue;
-		}
-	}
-
-	/*
-	 * Überprüfe, ob der hCO Request gültig ist
-	 */
-	$processingResultValue = '';
-	if ( array_key_exists('POST.VALIDATION', $curlResponseArray) ) {
-		$processingResultValue = $curlResponseArray['POST.VALIDATION'];
-	}
-
-	/*
-	 * Überprüfe, ob die URL des Bezahlformulars zurückgegeben wird
-	 */
-	$redirectUrlKey = 'FRONTEND.REDIRECT_URL';
-	$redirectUrlValue = '';
-	if (array_key_exists($redirectUrlKey, $curlResponseArray)) {
-		$redirectUrlValue = $curlResponseArray[$redirectUrlKey];
-	}
-
-	if ($processingResultValue == "ACK")
-	{
-		if (strstr($redirectUrlValue, "http"))
-		{
-			$paymentForm = '';
-			$paymentForm .= '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">';
-			$paymentForm .= '<html lang="en">';
-			$paymentForm .= '    <head>';
-			$paymentForm .= '        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">';
-			$paymentForm .= '        <title>PAY</title>';
-			$paymentForm .= '        <style type="text/css" media="screen">';
-			$paymentForm .= '            body {';
-			$paymentForm .= '                background-color: #f6f6f6;';
-			$paymentForm .= '            }';
-			$paymentForm .= '            iframe {';
-			$paymentForm .= '                align: center;';
-			$paymentForm .= '                height: 480px;';
-			$paymentForm .= '                width: 480px;';
-			$paymentForm .= '                overflow: hidden;';
-			$paymentForm .= '            }';
-			$paymentForm .= '        </style>';
-			$paymentForm .= '    </head>';
-			$paymentForm .= '    <body>';
-			$paymentForm .= '        <iframe src="'.$redirectUrlValue.'" frameborder="0">Your Browser doesn\'t support iFrames</iframe>';
-			$paymentForm .= '    </body>';
-			$paymentForm .= '</html>';
-
-			echo $paymentForm;
-		}
-		else
-		{
-			echo 'no redirect url found in curl response';
-			print_r($curlResponseArray);
-		}
-	}
-	else
-	{
-		echo 'processing result nok';
-		print_r($curlResponseArray);
-	}
+$temp=urldecode($buf);
+$temp=split("=",$temp,2);
+$postatt=$temp[0];
+$postvar=$temp[1];
+$returnvalue[$postatt]=$postvar;
+//print "<br>var: $postatt - value: $postvar<br>";
 }
-else
+
+$processingresult=$returnvalue['POST.VALIDATION'];
+
+$redirectURL=$returnvalue['FRONTEND.REDIRECT_URL'];
+
+// everything ok, redirect to the WPF,
+if ($processingresult=="ACK")
 {
-echo 'Bitte setzen Sie ihre FRONTEND.RESPONSE_URL in diesem Skript (Zeile 39)! ';
+	if (strstr($redirectURL,"http")) // redirect url is returned ==> everything ok
+{
+		header("Location: $redirectURL");
+}
+	else // error-code is returned ... failure
+{
+		//header("Location: http://127.0.0.1/livesystem/error.php");
+		print_r($returnvalue);
+}
+}// there is a connection-problem to the ctpe server ... redirect to error page (change the URL to YOUR error page)
+	else
+{
+		// header("Location: http://127.0.0.1/livesystem/connection.php");
+		print_r($returnvalue);
+		//print_r($returnvalue);
 }
 ?>

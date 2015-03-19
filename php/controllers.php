@@ -1,5 +1,6 @@
 <?php
 require_once ("model.php");
+require_once ("helpers.php");
 require_once ("classes/Pool.php");
 require_once ("classes/Teilnehmer.php");
 require_once ("classes/Security.php");
@@ -19,8 +20,13 @@ function teilnehmen($poolurl, $request)
     else
     {
         $teilnehmer = new Teilnehmer();
-        $teilnehmer->setData($request->request->get('vorname'), $request->request->get('nachname'), $request->request->get('email'), $request->request->get('teilbetrag', $pool->getTeilbetrag()));
+        $teilnehmer->setData($request, $pool->getTeilbetrag());
+        //$security = $security->test($teilnehmer);
+        $isLegit = true;
 
-        require_once("templates/teilnehmen.php");
+        if ($isLegit)
+            require_once("php/heidelpay/hcoFastLane.php");
+        else
+            require_once("templates/teilnehmen.php");
     }
 }

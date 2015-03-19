@@ -46,7 +46,7 @@
                         <?php echo '<div class="progress-bar progress-bar-warning progress-bar-striped active" style="width: ' . $teilnehmer->getTeilbetragProzent($pool->getErreicht(), $pool->getZiel()) . '">'; ?>
                         </div>
                     </div>
-                    <p class="maximal" style="width: 100%;" id="prozent100">
+                    <?php echo '<p class="maximal" style="width: ' . $pool->getZielProzent($teilnehmer->getTeilbetrag()) . ';" id="prozent100">'; ?>
                         <?php echo $pool->getZiel() . '€'; ?>
                     </p>
                 </div>
@@ -105,8 +105,107 @@
                                 <?php echo '<input type="number" step="0.01" class="form-control" value="' . $teilnehmer->getTeilbetrag() .'" name="teilbetrag" aria-describedby="labelTeilbetrag">'; ?>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-euro"></span></span>
                             </div>
-                            <?php require_once("php/heidelpay/hcoFastLane.php"); ?>
-                            <?php echo '<input type="submit" value="Teilnehmen mit ' . $pool->getTeilbetrag() . '€" class="btn btn-default" id="buttonSubmit">'; ?>
+                            <div id="bezahlArten">
+                                <ul>
+                                    <li>
+                                        <?php echo '<input type="radio" name="bezahlart" value="paypal" id="bezahlArtPaypal" ' . $teilnehmer->isChecked('paypal') . '>'; ?>
+                                        <label for="bezahlArtPaypal">
+                                            <img src="../assets/bilder/paypal.png" title="Pay Pal" alt="Pay Pal">
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <?php echo '<input type="radio" name="bezahlart" value="sofortueberweisung" id="bezahlArtSofortueberweisung" ' . $teilnehmer->isChecked('sofortueberweisung') . '>'; ?>
+                                        <label for="bezahlArtSofortueberweisung">
+                                            <img src="../assets/bilder/sofortueberweisung.png" title="Sofortüberweisung" alt="sofortüberweisung">
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <?php echo '<input type="radio" name="bezahlart" value="visa" id="bezahlArtVisa" ' . $teilnehmer->isChecked('visa') . '>'; ?>
+                                        <label for="bezahlArtVisa">
+                                            <img src="../assets/bilder/visa.png" title="Visa" alt="Visa">
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <?php echo '<input type="radio" name="bezahlart" value="mastercard" id="bezahlArtMasterCard" ' . $teilnehmer->isChecked('mastercard') . '>'; ?>
+                                        <label for="bezahlArtMasterCard">
+                                            <img src="../assets/bilder/mastercard.png" title="MasterCard" alt="MasterCard">
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div id="bezahlArt">
+                                <div id="paypal" class="none">
+                                    <div class="input-group">
+                                        <span class="input-group-addon eingabeBeschreibung" id="labelBenutzerPaypal"><span class="glyphicon glyphicon-user"></span> Benutzername</span>
+                                        <?php echo '<input type="text" class="form-control" placeholder="Benutzername / ID" value="' . $teilnehmer->getPaypalID() . '" name="benutzerPaypal" aria-describedby="labelBenutzerPaypal">'; ?>
+                                    </div>
+                                </div>
+                                <div id="sofortueberweisung" class="none">
+                                    <div class="input-group">
+                                        <span class="input-group-addon eingabeBeschreibung" id="labelKontoinhaberUeberweisung"><span class="glyphicon glyphicon-user"></span> Kontoinhaber</span>
+                                        <?php echo '<input type="text" class="form-control" placeholder="Kontoinhaber" value="' . $teilnehmer->getUeberweisungInhaber . '" name="inhaberUeberweisung" aria-describedby="labelKontoinhaberUeberweisung">'; ?>
+                                    </div>
+                                    <div class="input-group">
+                                        <span class="input-group-addon eingabeBeschreibung" id="labelKontonummerUeberweisung"><span class="glyphicon glyphicon-user"></span> Kontonummer</span>
+                                        <?php echo '<input type="text" class="form-control" placeholder="Kontonummer" value="' . $teilnehmer->getUeberweisungNummer() . '" name="nummerUeberweisung" aria-describedby="labelKontonummerUeberweisung">'; ?>
+                                    </div>
+                                    <div class="input-group">
+                                        <span class="input-group-addon eingabeBeschreibung" id="labelBLZUeberweisung"><span class="glyphicon glyphicon-user"></span> Bankleitszahl</span>
+                                        <?php echo '<input type="text" class="form-control" placeholder="Beankleitszahl" value="' . $teilnehmer->getUeberweisungBLZ() . '" name="blzUeberweisung" aria-describedby="labelBankleitszahlUeberweisung">'; ?>
+                                    </div>
+                                </div>
+                                <div id="visa" class="none">
+                                    <div class="input-group">
+                                        <span class="input-group-addon eingabeBeschreibung" id="labelKartennummerVisa"><span class="glyphicon glyphicon-user"></span> Kartennummer</span>
+                                        <?php echo '<input type="text" class="form-control" placeholder="Kartennummer" value="' . $teilnehmer->getKreditKarteNummer() . '" name="nummerVisa" aria-describedby="labelKartennummerVisa">'; ?>
+                                    </div>
+                                    <div class="input-group">
+                                        <span class="input-group-addon eingabeBeschreibung" id="labelKarteninhaberVisa"><span class="glyphicon glyphicon-user"></span> Karteninhaber</span>
+                                        <?php echo '<input type="text" class="form-control" placeholder="Karteninhaber" value="' . $teilnehmer->getKreditKarteInhaber(). '" name="inhaberVisa" aria-describedby="labelKarteninhabervisa">'; ?>
+                                    </div>
+                                    <div class="input-group">
+                                        <span class="input-group-addon eingabeBeschreibung" id="labelablaufdatumVisa"><span class="glyphicon glyphicon-user"></span> Ablaufdatum</span>
+                                        <select type="button" class="btn btn-default" name="ablaufmonatVisa">
+                                            <option class="none">Monat</option>
+                                            <?php showMonths($teilnehmer->getKreditKarteMonat()); ?>
+                                        </select>
+                                        <select type="button" class="btn btn-default" name="ablaufJahrVisa">
+                                            <option class="none">Jahr</option>
+                                            <?php showYears($teilnehmer->getKreditKarteJahr()); ?>
+                                        </select>
+                                    </div>
+                                    <div class="input-group">
+                                        <span class="input-group-addon eingabeBeschreibung" id="labelPruefnummerVisa"><span class="glyphicon glyphicon-user"></span> Prüfnummer</span>
+                                        <?php echo '<input type="text" class="form-control" placeholder="Prüfnummer" value="' . $teilnehmer->getKreditKartePruefnummer() . '" name="pruefnummerVisa" aria-describedby="labelPruefnummerVisa">'; ?>
+                                    </div>
+                                </div>
+                                <div id="mastercard" class="none">
+                                    <div class="input-group">
+                                        <span class="input-group-addon eingabeBeschreibung" id="labelKartennummerMasterCard"><span class="glyphicon glyphicon-user"></span> Kartennummer</span>
+                                        <?php echo '<input type="text" class="form-control" placeholder="Kartennummer" value="' . $teilnehmer->getKreditKarteNummer() . '" name="nummerMasterCard" aria-describedby="labelKartennummerMasterCard">'; ?>
+                                    </div>
+                                    <div class="input-group">
+                                        <span class="input-group-addon eingabeBeschreibung" id="labelKarteninhaberMasterCard"><span class="glyphicon glyphicon-user"></span> Karteninhaber</span>
+                                        <?php echo '<input type="text" class="form-control" placeholder="Karteninhaber" value="' . $teilnehmer->getKreditKarteInhaber() . '" name="inhaberMasterCard" aria-describedby="labelKarteninhabervisa">'; ?>
+                                    </div>
+                                    <div class="input-group">
+                                        <span class="input-group-addon eingabeBeschreibung" id="labelablaufdatumMasterCard"><span class="glyphicon glyphicon-user"></span> Ablaufdatum</span>
+                                        <select type="button" class="btn btn-default" name="ablaufmonatMasterCard">
+                                            <option class="none">Monat</option>
+                                            <?php showMonths($teilnehmer->getKreditKarteMonat()); ?>
+                                        </select>
+                                        <select type="button" class="btn btn-default" name="ablaufJahrMasterCard">
+                                            <option class="none">Jahr</option>
+                                            <?php showYears($teilnehmer->getKreditKarteJahr()); ?>
+                                        </select>
+                                    </div>
+                                    <div class="input-group">
+                                        <span class="input-group-addon eingabeBeschreibung" id="labelPruefnummerMasterCard"><span class="glyphicon glyphicon-user"></span> Prüfnummer</span>
+                                        <?php echo '<input type="text" class="form-control" placeholder="Prüfnummer" value="' . $teilnehmer->getKreditKartePruefnummer() . '" name="pruefnummerMasterCard" aria-describedby="labelPruefnummerMasterCard">'; ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php echo '<input type="submit" value="Teilnehmen mit ' . $pool->getTeilbetrag() . '€" class="btn btn-default none" id="buttonSubmit">'; ?>
                         </form>
                     </div>
                 </div>
