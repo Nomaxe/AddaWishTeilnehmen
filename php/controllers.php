@@ -4,6 +4,7 @@ require_once ("helpers.php");
 require_once ("classes/Pool.php");
 require_once ("classes/Teilnehmer.php");
 require_once ("classes/Security.php");
+require_once ('classes/KreditKarte.php');
 
 use Symfony\Component\HttpFoundation\Request;
 
@@ -21,8 +22,7 @@ function teilnehmen($poolurl, $request)
     {
         $teilnehmer = new Teilnehmer();
         $teilnehmer->setData($request, $pool->getTeilbetrag());
-        //$security = $security->test($teilnehmer);
-        $isLegit = true;
+        $isLegit = $security->test($teilnehmer);
 
         if ($isLegit)
             require_once("php/heidelpay/hcoFastLane.php");

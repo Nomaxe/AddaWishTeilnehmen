@@ -13,11 +13,8 @@ class Teilnehmer
     private $ueberweisungInhaber;
     private $ueberweisungNummer;
     private $ueberweisungBLZ;
-    private $kreditKarteNummer;
-    private $kreditKarteInhaber;
-    private $kreditKarteMonat;
-    private $kreditKarteJahr;
-    private $kreditKartePruefnummer;
+    private $visa;
+    private $mastercard;
 
     function setData($request, $empholenerTeilbetrag)
     {
@@ -31,11 +28,18 @@ class Teilnehmer
         $this->ueberweisungInhaber = $request->request->get('inhaberUeberweisung', $this->getName());
         $this->ueberweisungNummer = $request->request->get('nummerUeberweisung');
         $this->ueberweisungBLZ = $request->request->get('blzUeberweisung');
-        $this->kreditKarteNummer = $request->request->get('nummerVisa', $request->query->get('nummerMasterCard'));
-        $this->kreditKarteInhaber = $request->request->get('inhaberVisa', $request->query->get('inhaberMasterCard'));
-        $this->kreditKarteMonat = $request->request->get('ablaufmonatVisa', $request->query->get('ablaufmonatMasterCard'));
-        $this->kreditKarteJahr = $request->request->get('ablaufJahrVisa', $request->query->get('ablaufJahrMasterCard'));
-        $this->kreditKartePruefnummer = $request->request->get('pruefnummerVisa', $request->query->get('pruefnummerMasterCard'));
+
+        $this->visa = new KreditKarte($request->request->get('nummerVisa'),
+                                      $request->request->get('inhaberVisa'),
+                                      $request->request->get('ablaufmonatVisa'),
+                                      $request->request->get('ablaufJahrVisa'),
+                                      $request->request->get('pruefnummerVisa'));
+
+        $this->mastercard = new KreditKarte($request->request->get('nummerMasterCard'),
+                                            $request->request->get('inhaberMasterCard'),
+                                            $request->request->get('ablaufmonatMasterCard'),
+                                            $request->request->get('ablaufJahrMasterCard'),
+                                            $request->request->get('pruefnummerMasterCard'));
     }
 
     function getVorname()
@@ -94,34 +98,65 @@ class Teilnehmer
         return $this->ueberweisungBLZ;
     }
 
-    function getKreditKarteNummer()
+    function getVisa()
     {
-        return $this->kreditKarteNummer;
+        return $this->visa;
     }
 
-    function getKreditKarteMonat()
+    function getMasterCard()
     {
-        return $this->kreditKarteMonat;
+        return $this->mastercard;
     }
 
-     function getKreditKarteInhaber()
+    function getBezahlart()
     {
-        return $this->kreditKarteInhaber;
-    }
-
-    function getKreditKarteJahr()
-    {
-        return $this->kreditKarteJahr;
-    }
-
-    function getKreditKartePruefnummer()
-    {
-        return $this->kreditKartePruefnummer;
+        return $this->bezahlArt;
     }
 
     function isChecked($bezahlart)
     {
         if ($this->bezahlArt == $bezahlart)
             return 'checked="checked"';
+    }
+
+    function setHeidelpayData($parameters)
+    {
+        if ($this->bezahlArt == 'paypal')
+        {
+            $parameters['PAYMENT.CODE'] = "VA.DB";
+            $parameters['ACCOUNT.BRAND'] = "PAYPAL";
+        }
+        else if ($this->bezahlArt == 'sofortueberweisung')
+        {
+            $parameters['PAYMENT.CODE'] = "OT.BA";
+            $parameters['ACCOUNT.HOLDER'] = $this->getUeberweisungInhaber();
+            $parameters['ACCOUNT.BANKNAME'] = "osnfosdf";
+            $parameters['ACCOUNT.BANK'] = $this->getUeberweisungBLZ();
+            $parameters['ACCOUNT.IBAN'] = $this->getUeberweisungNummer();
+            $parameters['ACCOUNT.BIC'] = "12345678";
+            $parameters['ACCOUNT:COUNTRY'] = "de";
+        }
+        else if ($this->bezahlArt == 'visa')
+        {
+            $parameters['PAYMENT.CODE'] = "CC.RG";
+            $parameters['ACCOUNT.HOLDER'] = $this->visa->getInhaber();
+            $parameters['ACCOUNT.BRAND'] = "VISA";
+            $parameters['ACCOUNT.NUMBER'] = $this->visa->getNummer();
+            $parameters['ACCOUNT.EXPIRY_MONTH'] = "09";
+            $parameters['ACCOUNT.EXPIRY_YEAR'] = "2015";
+            $parameters['ACCOUNT.VERIFICATION'] = $this->visa->getPruefnummer();
+        }
+        else if ($this->bezahlArt == 'mastercard')
+        {
+            $parameters['PAYMENT.CODE'] = "CC.RG";
+            $parameters['ACCOUNT.HOLDER'] = $this->mastercard->getInhaber();
+            $parameters['ACCOUNT.BRAND'] = "MASTERCARD";
+            $parameters['ACCOUNT.NUMBER'] = $this->mastercard->getNummer();
+            $parameters['ACCOUNT.EXPIRY_MONTH'] = $this->mastercard->getMonat();
+            $parameters['ACCOUNT.EXPIRY_YEAR'] = $this->mastercard->getJahr();
+            $parameters['ACCOUNT.VERIFICATION'] = $this->mastercard->getPruefnummer();
+        }
+
+        return $parameters;
     }
 } 

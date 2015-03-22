@@ -2,35 +2,18 @@
 
 //URL fuer Testsystem
 $url = "https://test-heidelpay.hpcgw.net/sgw/gtw";
-
 $parameters['SECURITY.SENDER'] = "31HA07BC8124AD82A9E96D9A35FAFD2A";
 $parameters['USER.LOGIN'] = "31ha07bc8124ad82a9e96d486d19edaa";
 $parameters['USER.PWD'] = "password";
 $parameters['TRANSACTION.CHANNEL'] = "31HA07BC81A71E2A47DA94B6ADC524D8";
 
-$parameters['ACCOUNT.HOLDER'] = $teilnehmer->getName();
-$parameters['ACCOUNT.NUMBER'] = $teilnehmer->getKreditKarteNummer();
-//$parameters['ACCOUNT.BRAND'] = "PAYPAL";
-$parameters['ACCOUNT.BRAND'] = "VISA";
-$parameters['ACCOUNT.EXPIRY_MONTH'] = $teilnehmer->getKreditKarteMonat();
-$parameters['ACCOUNT.EXPIRY_YEAR'] = $teilnehmer->getKreditKarteJahr();
-$parameters['ACCOUNT.VERIFICATION'] = $teilnehmer->getKreditKartePruefnummer();
+$parameters = $teilnehmer->setHeidelpayData($parameters);
 
-//Payment Code -- Auswahl Bezahlmethode und Typ
-//$parameters['PAYMENT.CODE'] = "DD.RG";  // Registrierung Lastschrift
-//$parameters['PAYMENT.CODE'] = "CC.RG";  // Registrierung Kreditkarte
-$parameters['PAYMENT.CODE'] = "CC.DB";  // Direkte Belastung
-//$parameters['PAYMENT.CODE'] = "CC.PA";  // Reservierende Buchung
-//$parameters['PAYMENT.CODE'] = "OT.PA";  // Sofort�berweisung, giropay
-//$parameters['PAYMENT.CODE'] = "VA.DB";  // Paypal
 $parameters['PRESENTATION.CURRENCY'] = "EUR";
 
 //Response URL angeben
-$parameters['FRONTEND.RESPONSE_URL'] = "192.168.178.41/teilnehmen/php/heidelpay/response-page.php";
+$parameters['FRONTEND.RESPONSE_URL'] = "192.168.0.17/teilnehmen/php/heidelpay/response-page.php";
 
-//CSS- und/oder Jscript-Datei angeben
-$parameters['FRONTEND.CSS_PATH'] = "http://127.0.0.1/Testskripte/onlycarddetails_new.css";
-//$parameters['FRONTEND.JSCRIPT_PATH'] = "http://127.0.0.1/wpf/wpfui.js";
 
 $parameters['PRESENTATION.AMOUNT'] = $teilnehmer->getTeilbetrag();
 //$parameters['PRESENTATION.AMOUNT'] = '5.2';
@@ -63,20 +46,20 @@ $parameters['NAME.GIVEN'] = "";
 $parameters['NAME.FAMILY'] = "";
 */
 
-$parameters['NAME.GIVEN'] = "Markus";
-$parameters['NAME.FAMILY'] = "Mustermann";
+$parameters['NAME.GIVEN'] = $teilnehmer->getVorname();
+$parameters['NAME.FAMILY'] = $teilnehmer->getNachname();
 $parameters['ADDRESS.STREET'] = "Musterstrasse 1";
 $parameters['ADDRESS.ZIP'] = "12345";
 $parameters['ADDRESS.CITY'] = "Musterstadt";
 $parameters['ADDRESS.COUNTRY'] = "DE";
 //$parameters['ADDRESS.STATE'] = "";
-$parameters['CONTACT.EMAIL'] = "test@example.com";
+$parameters['CONTACT.EMAIL'] = $teilnehmer->getEmail();
 
 //building the postparameter string to send into the WPF
 
 $result = '';
 foreach ($parameters AS $key => $value)
-$result .= strtoupper($key).'='.urlencode($value).'&';
+    $result .= strtoupper($key).'='.urlencode($value).'&';
 $strPOST = stripslashes($result);
 
 //echo $strPOST;
@@ -104,12 +87,12 @@ curl_close($cpt);
 $r_arr=explode("&",$curlresultURL);
 foreach($r_arr AS $buf)
 {
-$temp=urldecode($buf);
-$temp=split("=",$temp,2);
-$postatt=$temp[0];
-$postvar=$temp[1];
-$returnvalue[$postatt]=$postvar;
-//print "<br>var: $postatt - value: $postvar<br>";
+    $temp=urldecode($buf);
+    $temp=split("=",$temp,2);
+    $postatt=$temp[0];
+    $postvar=$temp[1];
+    $returnvalue[$postatt]=$postvar;
+    //print "<br>var: $postatt - value: $postvar<br>";
 }
 
 $processingresult=$returnvalue['POST.VALIDATION'];
@@ -119,20 +102,20 @@ $redirectURL=$returnvalue['FRONTEND.REDIRECT_URL'];
 // everything ok, redirect to the WPF,
 if ($processingresult=="ACK")
 {
-	if (strstr($redirectURL,"http")) // redirect url is returned ==> everything ok
-{
-		header("Location: $redirectURL");
-}
-	else // error-code is returned ... failure
-{
-		//header("Location: http://127.0.0.1/livesystem/error.php");
-		print_r($returnvalue);
-}
+    if (strstr($redirectURL,"http")) // redirect url is returned ==> everything ok
+    {
+        header("Location: $redirectURL");
+    }
+    else // error-code is returned ... failure
+    {
+        //header("Location: http://127.0.0.1/livesystem/error.php");
+        print_r($returnvalue);
+    }
 }// there is a connection-problem to the ctpe server ... redirect to error page (change the URL to YOUR error page)
-	else
+else
 {
-		// header("Location: http://127.0.0.1/livesystem/connection.php");
-		print_r($returnvalue);
-		//print_r($returnvalue);
+    // header("Location: http://127.0.0.1/livesystem/connection.php");
+    print_r($returnvalue);
+    //print_r($returnvalue);
 }
 ?>

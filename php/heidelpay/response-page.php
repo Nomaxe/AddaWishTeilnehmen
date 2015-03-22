@@ -10,19 +10,17 @@
 //redirect the users browser to it.
 // PROCESSING.RESULT gets PROCESSING_RESULT when posting back (URL encoding)
 $returnvalue=$_POST['PROCESSING_RESULT'];
-echo "hi";
 if ($returnvalue)
 {
-    echo "hi";
     if (strstr($returnvalue,"ACK"))
     {
-        echo "yey";
         // URL after successful transacvtion (change the URL to YOUR success page: e.g. return to shopping)
+
+        //----------------------Hier muss noch die Zahlung in die Datenbank-Logik rein ----------------------------------------------------
         print "http://www.merchant.com/success.html";
     }
     else
     {
-        echo "hi";
         // URL error in transaction (change the URL to YOUR error page)
         print "http://www.merchant.com/error.html";
     }

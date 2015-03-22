@@ -149,7 +149,6 @@ function showInputFelder()
         setClasses(knotenUeberweisung, "none");
         setClasses(knotenVisa, "none");
         setClasses(knotenMasterCard, "none");
-        setClasses(knotenSubmit, "btn btn-default block");
     }
     else if (radioUeberweisung.checked)
     {
@@ -157,7 +156,6 @@ function showInputFelder()
         setClasses(knotenUeberweisung, "block");
         setClasses(knotenVisa, "none");
         setClasses(knotenMasterCard, "none");
-        setClasses(knotenSubmit, "btn btn-default block");
     }
     else if (radioVisa.checked)
     {
@@ -165,7 +163,7 @@ function showInputFelder()
         setClasses(knotenUeberweisung, "none");
         setClasses(knotenVisa, "block");
         setClasses(knotenMasterCard, "none");
-        setClasses(knotenSubmit, "btn btn-default block");
+        setClasses(knotenSubmit, "btn btn-default block")
     }
     else if (radioMasterCard.checked)
     {
@@ -173,7 +171,6 @@ function showInputFelder()
         setClasses(knotenUeberweisung, "none");
         setClasses(knotenVisa, "none");
         setClasses(knotenMasterCard, "block");
-        setClasses(knotenSubmit, "btn btn-default block");
     }
     else
     {
@@ -181,7 +178,6 @@ function showInputFelder()
         setClasses(knotenUeberweisung, "none");
         setClasses(knotenVisa, "none");
         setClasses(knotenMasterCard, "none");
-        setClasses(knotenSubmit, "btn btn-default none");
     }
 }
 

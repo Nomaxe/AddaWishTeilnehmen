@@ -135,10 +135,6 @@
                             </div>
                             <div id="bezahlArt">
                                 <div id="paypal" class="none">
-                                    <div class="input-group">
-                                        <span class="input-group-addon eingabeBeschreibung" id="labelBenutzerPaypal"><span class="glyphicon glyphicon-user"></span> Benutzername</span>
-                                        <?php echo '<input type="text" class="form-control" placeholder="Benutzername / ID" value="' . $teilnehmer->getPaypalID() . '" name="benutzerPaypal" aria-describedby="labelBenutzerPaypal">'; ?>
-                                    </div>
                                 </div>
                                 <div id="sofortueberweisung" class="none">
                                     <div class="input-group">
@@ -157,55 +153,55 @@
                                 <div id="visa" class="none">
                                     <div class="input-group">
                                         <span class="input-group-addon eingabeBeschreibung" id="labelKartennummerVisa"><span class="glyphicon glyphicon-user"></span> Kartennummer</span>
-                                        <?php echo '<input type="text" class="form-control" placeholder="Kartennummer" value="' . $teilnehmer->getKreditKarteNummer() . '" name="nummerVisa" aria-describedby="labelKartennummerVisa">'; ?>
+                                        <?php echo '<input type="text" class="form-control" placeholder="Kartennummer" value="' . $teilnehmer->getVisa()->getNummer() . '" name="nummerVisa" aria-describedby="labelKartennummerVisa">'; ?>
                                     </div>
                                     <div class="input-group">
                                         <span class="input-group-addon eingabeBeschreibung" id="labelKarteninhaberVisa"><span class="glyphicon glyphicon-user"></span> Karteninhaber</span>
-                                        <?php echo '<input type="text" class="form-control" placeholder="Karteninhaber" value="' . $teilnehmer->getKreditKarteInhaber(). '" name="inhaberVisa" aria-describedby="labelKarteninhabervisa">'; ?>
+                                        <?php echo '<input type="text" class="form-control" placeholder="Karteninhaber" value="' . $teilnehmer->getVisa()->getInhaber() . '" name="inhaberVisa" aria-describedby="labelKarteninhabervisa">'; ?>
                                     </div>
                                     <div class="input-group">
                                         <span class="input-group-addon eingabeBeschreibung" id="labelablaufdatumVisa"><span class="glyphicon glyphicon-user"></span> Ablaufdatum</span>
                                         <select type="button" class="btn btn-default" name="ablaufmonatVisa">
                                             <option class="none">Monat</option>
-                                            <?php showMonths($teilnehmer->getKreditKarteMonat()); ?>
+                                            <?php showMonths($teilnehmer->getVisa()->getMonat()); ?>
                                         </select>
                                         <select type="button" class="btn btn-default" name="ablaufJahrVisa">
                                             <option class="none">Jahr</option>
-                                            <?php showYears($teilnehmer->getKreditKarteJahr()); ?>
+                                            <?php showYears($teilnehmer->getVisa()->getJahr()); ?>
                                         </select>
                                     </div>
                                     <div class="input-group">
                                         <span class="input-group-addon eingabeBeschreibung" id="labelPruefnummerVisa"><span class="glyphicon glyphicon-user"></span> Prüfnummer</span>
-                                        <?php echo '<input type="text" class="form-control" placeholder="Prüfnummer" value="' . $teilnehmer->getKreditKartePruefnummer() . '" name="pruefnummerVisa" aria-describedby="labelPruefnummerVisa">'; ?>
+                                        <?php echo '<input type="text" class="form-control" placeholder="Prüfnummer" value="' . $teilnehmer->getVisa()->getPruefnummer() . '" name="pruefnummerVisa" aria-describedby="labelPruefnummerVisa">'; ?>
                                     </div>
                                 </div>
                                 <div id="mastercard" class="none">
                                     <div class="input-group">
                                         <span class="input-group-addon eingabeBeschreibung" id="labelKartennummerMasterCard"><span class="glyphicon glyphicon-user"></span> Kartennummer</span>
-                                        <?php echo '<input type="text" class="form-control" placeholder="Kartennummer" value="' . $teilnehmer->getKreditKarteNummer() . '" name="nummerMasterCard" aria-describedby="labelKartennummerMasterCard">'; ?>
+                                        <?php echo '<input type="text" class="form-control" placeholder="Kartennummer" value="' . $teilnehmer->getMasterCard()->getNummer() . '" name="nummerMasterCard" aria-describedby="labelKartennummerMasterCard">'; ?>
                                     </div>
                                     <div class="input-group">
                                         <span class="input-group-addon eingabeBeschreibung" id="labelKarteninhaberMasterCard"><span class="glyphicon glyphicon-user"></span> Karteninhaber</span>
-                                        <?php echo '<input type="text" class="form-control" placeholder="Karteninhaber" value="' . $teilnehmer->getKreditKarteInhaber() . '" name="inhaberMasterCard" aria-describedby="labelKarteninhabervisa">'; ?>
+                                        <?php echo '<input type="text" class="form-control" placeholder="Karteninhaber" value="' . $teilnehmer->getMasterCard()->getInhaber() . '" name="inhaberMasterCard" aria-describedby="labelKarteninhabervisa">'; ?>
                                     </div>
                                     <div class="input-group">
                                         <span class="input-group-addon eingabeBeschreibung" id="labelablaufdatumMasterCard"><span class="glyphicon glyphicon-user"></span> Ablaufdatum</span>
                                         <select type="button" class="btn btn-default" name="ablaufmonatMasterCard">
                                             <option class="none">Monat</option>
-                                            <?php showMonths($teilnehmer->getKreditKarteMonat()); ?>
+                                            <?php showMonths($teilnehmer->getMasterCard()->getMonat()); ?>
                                         </select>
                                         <select type="button" class="btn btn-default" name="ablaufJahrMasterCard">
                                             <option class="none">Jahr</option>
-                                            <?php showYears($teilnehmer->getKreditKarteJahr()); ?>
+                                            <?php showYears($teilnehmer->getMasterCard()->getJahr()); ?>
                                         </select>
                                     </div>
                                     <div class="input-group">
                                         <span class="input-group-addon eingabeBeschreibung" id="labelPruefnummerMasterCard"><span class="glyphicon glyphicon-user"></span> Prüfnummer</span>
-                                        <?php echo '<input type="text" class="form-control" placeholder="Prüfnummer" value="' . $teilnehmer->getKreditKartePruefnummer() . '" name="pruefnummerMasterCard" aria-describedby="labelPruefnummerMasterCard">'; ?>
+                                        <?php echo '<input type="text" class="form-control" placeholder="Prüfnummer" value="' . $teilnehmer->getMasterCard()->getPruefnummer() . '" name="pruefnummerMasterCard" aria-describedby="labelPruefnummerMasterCard">'; ?>
                                     </div>
                                 </div>
                             </div>
-                            <?php echo '<input type="submit" value="Teilnehmen mit ' . $pool->getTeilbetrag() . '€" class="btn btn-default none" id="buttonSubmit">'; ?>
+                            <?php echo '<input type="submit" value="Teilnehmen mit ' . $pool->getTeilbetrag() . '€" class="btn btn-default" id="buttonSubmit">'; ?>
                         </form>
                     </div>
                 </div>
