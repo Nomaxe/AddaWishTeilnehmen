@@ -129,7 +129,7 @@ class Pool
 
     function getZielProzent($teilbetrag)
     {
-        if ($this->erreicht + $teilbetrag > $thia->ziel)
+        if ($this->erreicht + $teilbetrag > $this->ziel)
             return $this->ziel * 100 / ($this->erreicht + $teilbetrag) . "%";
         else
             return "100%";

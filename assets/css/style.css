@@ -58,28 +58,28 @@ body
 
 #pool #countdown .rechts
 {
-    padding-left: 4.8%;
+
     padding-right: 2.2%;
 }
 
 #pool #countdown .links
 {
     padding-left: 2%;
-    padding-right: 4.8%;
+
 }
 
 @media (min-width: 1201px)
 {
     #pool #countdown .rechts
     {
-        padding-left: 7.5%;
+        padding-left: 4.5%;
         padding-right: 2.2%;
     }
 
     #pool #countdown .links
     {
         padding-left: 2%;
-        padding-right: 7.5%;
+        padding-right: 4.5%;
     }
 }
 
@@ -349,4 +349,137 @@ body
 .none
 {
     display: none;
+}
+
+@media (max-width: 700px)
+{
+    #pool #countdown .rechts
+    {
+        padding: 0px;
+        padding-right: 15%;
+        padding-left: 15%;
+    }
+
+    #pool #countdown .links
+    {
+        padding: 0px;
+        padding-right: 15%;
+        padding-left: 15%;
+    }
+
+    #bezahlArten ul li label img
+    {
+        height: 40px;
+        width: 45px;
+    }
+}
+
+@media (min-width: 330px) and (max-width: 380px)
+{
+    #bezahlArten ul li label img
+    {
+        height: 40px;
+        width: 55px;
+    }
+}
+
+
+@media (min-width: 701px) and (max-width: 1000px)
+{
+    #pool #countdown .rechts
+    {
+        width: 100%;
+        padding-left: 60%;
+        padding-right: 0%;
+        top: -100px;
+    }
+
+    #pool #countdown .links
+    {
+        width: 50%;
+        padding-left: 0%;
+        padding-right: 10%;
+    }
+}
+
+@media (min-width: 1100px)
+{
+    #bezahlArten ul li label img
+    {
+        height: 40px;
+        width: 50px;
+    }
+}
+
+@media (min-width: 1200px)
+{
+    #bezahlArten ul li label img
+    {
+        height: 40px;
+        width: 53px;
+    }
+}
+
+@media (min-width: 1600px)
+{
+    #bezahlArten ul li label img
+    {
+        height: 40px;
+        width: 60px;
+    }
+}
+
+@media (min-width: 1281px)
+{
+    #pool #countdown .rechts
+    {
+        /*padding-left: 7.5%;*/padding-left: 7.5%;
+        padding-right: 2.2%;
+    }
+
+    #pool #countdown .rechts .pull-right
+    {
+        width: 100px;
+        height: 100px;
+    }
+
+    #pool #countdown .rechts .pull-left
+    {
+        width: 100px;
+        height: 100px;
+    }
+
+    #pool #countdown .rechts p
+    {
+        font-size: 20px;
+    }
+
+    #pool #countdown .links
+    {
+        padding-left: 2%;
+        /*padding-right: 7.5%;*/padding-right: 7.5%;
+    }
+
+    #pool #countdown .links .pull-right
+    {
+        width: 100px;
+        height: 100px;
+    }
+
+    #pool #countdown .links .pull-left
+    {
+        width: 100px;
+        height: 100px;
+    }
+
+    #pool #countdown .links p
+    {
+        font-size: 20px;
+    }
+}
+
+.error
+{
+    background-color: #FAEBE7;
+    border: 1px dashed #FF0000;
 }

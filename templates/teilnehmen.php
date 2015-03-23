@@ -4,6 +4,8 @@
     <title>AddaWish - Teilnehmen</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="../assets/bilder/addawish.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="../assets/bilder/addawish.ico" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../assets/fonts/font-awesome-4.3.0/css/font-awesome.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
@@ -37,17 +39,17 @@
                     </div>
                 </div>
                 <div class="col-md-12" id="slider">
-                   <?php echo '<p class="momentan" id="momentan" style="width:' . $pool->getErreichtProzent($teilnehmer->getTeilbetrag()) . '">'; ?>
-                       <?php echo $pool->getErreichtEuro(); ?>
-                   </p>
+                    <?php echo '<p class="momentan" id="momentan" style="width:' . $pool->getErreichtProzent($teilnehmer->getTeilbetrag()) . '">'; ?>
+                        <?php echo 'Erreicht: '. $pool->getErreichtEuro(); ?>
+                    </p>
                     <div class="progress progress-striped" id="progressbar">
                         <?php echo '<div class="progress-bar progress-bar-custom active" role="progressbar" style="width: ' . $pool->getErreichtProzent($teilnehmer->getTeilbetrag()) . '">'; ?>
                         </div>
                         <?php echo '<div class="progress-bar progress-bar-warning progress-bar-striped active" style="width: ' . $teilnehmer->getTeilbetragProzent($pool->getErreicht(), $pool->getZiel()) . '">'; ?>
                         </div>
                     </div>
-                    <?php echo '<p class="maximal" style="width: ' . $pool->getZielProzent($teilnehmer->getTeilbetrag()) . ';" id="prozent100">'; ?>
-                        <?php echo $pool->getZiel() . '€'; ?>
+                        <?php echo '<p class="maximal" style="width: ' . $pool->getZielProzent($teilnehmer->getTeilbetrag()) . ';" id="prozent100">'; ?>
+                        <?php echo 'Zielbetrag: ' . $pool->getZiel() . '€'; ?>
                     </p>
                 </div>
                 <div class="col-md-12" id="countdown">
@@ -87,7 +89,7 @@
                 <h2>Gemeinsam mit Freunden Schenken</h2>
                 <div class="col-md-12">
                     <div class="formular">
-                        <form action="#" method="post">
+                        <form action="#" method="post" onsubmit="return formularTest()">
                             <div class="input-group">
                                 <span class="input-group-addon eingabeBeschreibung" id="labelVorname"><span class="glyphicon glyphicon-user"></span> Vorname</span>
                                 <?php echo '<input type="text" class="form-control" placeholder="Vorname" value="' . $teilnehmer->getVorname() . '" name="vorname" aria-describedby="labelVorname">'; ?>

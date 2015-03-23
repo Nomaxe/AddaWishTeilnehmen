@@ -3,6 +3,7 @@
   <component name="NewModuleRootManager">
     <content url="file:$MODULE_DIR$/../../..//$MODULE_DIR$" />
     <content url="file:$MODULE_DIR$/../../../192.168.0.17/html/teilnehmen" />
+    <content url="file:$MODULE_DIR$/../../../192.168.10.130/html/teilnehmen" />
     <content url="file:$MODULE_DIR$/../../../192.168.10.142/html/teilnehmen" />
     <content url="file:$MODULE_DIR$/../../../192.168.178.37/html/teilnehmen" />
     <content url="file:$MODULE_DIR$/../../../192.168.178.41/html/teilnehmen" />
@@ -21,3 +22,4 @@
     </orderEntry>
   </component>
 </module>
+

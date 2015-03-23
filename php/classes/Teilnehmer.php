@@ -134,7 +134,6 @@ class Teilnehmer
             $parameters['ACCOUNT.BANK'] = $this->getUeberweisungBLZ();
             $parameters['ACCOUNT.IBAN'] = $this->getUeberweisungNummer();
             $parameters['ACCOUNT.BIC'] = "12345678";
-            $parameters['ACCOUNT:COUNTRY'] = "de";
         }
         else if ($this->bezahlArt == 'visa')
         {

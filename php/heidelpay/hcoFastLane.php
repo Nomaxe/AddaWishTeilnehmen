@@ -12,7 +12,7 @@ $parameters = $teilnehmer->setHeidelpayData($parameters);
 $parameters['PRESENTATION.CURRENCY'] = "EUR";
 
 //Response URL angeben
-$parameters['FRONTEND.RESPONSE_URL'] = "192.168.0.17/teilnehmen/php/heidelpay/response-page.php";
+$parameters['FRONTEND.RESPONSE_URL'] = "192.168.10.130/teilnehmen/php/heidelpay/response-page.php";
 
 
 $parameters['PRESENTATION.AMOUNT'] = $teilnehmer->getTeilbetrag();
@@ -33,7 +33,7 @@ $parameters['TRANSACTION.MODE'] = "CONNECTOR_TEST";
 $parameters['FRONTEND.ENABLED'] = "true";
 $parameters['FRONTEND.POPUP'] = "false";
 //$parameters['FRONTEND.SHOP_NAME'] = '';
-$parameters['FRONTEND.REDIRECT_TIME'] = "0";
+$parameters['FRONTEND.REDIRECT_TIME'] = "1";
 
 
 $parameters['FRONTEND.LANGUAGE_SELECTOR'] = "true";
@@ -54,6 +54,7 @@ $parameters['ADDRESS.CITY'] = "Musterstadt";
 $parameters['ADDRESS.COUNTRY'] = "DE";
 //$parameters['ADDRESS.STATE'] = "";
 $parameters['CONTACT.EMAIL'] = $teilnehmer->getEmail();
+$parameters['ACCOUNT.IDENTIFICATION'] = $pool->getId();
 
 //building the postparameter string to send into the WPF
 
@@ -81,9 +82,9 @@ curl_close($cpt);
 
 
 // here you can get all variables returned from the ctpe server (see post integration transactions documentation for help)
-//print $strPOST;
+print $strPOST;
 // parse results
-
+/*
 $r_arr=explode("&",$curlresultURL);
 foreach($r_arr AS $buf)
 {
@@ -117,5 +118,5 @@ else
     // header("Location: http://127.0.0.1/livesystem/connection.php");
     print_r($returnvalue);
     //print_r($returnvalue);
-}
+} */
 ?>

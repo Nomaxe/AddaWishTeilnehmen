@@ -1,4 +1,5 @@
 <?php
+use Symfony\Component\HttpFoundation\Request;
 //this page is called after the customer finishes
 //payment with the Web Payment Frontend.
 //It must be hosted YOUR system and accessible
@@ -15,14 +16,18 @@ if ($returnvalue)
     if (strstr($returnvalue,"ACK"))
     {
         // URL after successful transacvtion (change the URL to YOUR success page: e.g. return to shopping)
+        require_once ('../model.php');
+        $request = Request::createFromGlobals();
+        writeTeilnehmen($request);
 
-        //----------------------Hier muss noch die Zahlung in die Datenbank-Logik rein ----------------------------------------------------
-        print "http://www.merchant.com/success.html";
+
+
+        print "http://192.168.10.130/teilnehmen/horst-2133155758508/success";
     }
     else
     {
         // URL error in transaction (change the URL to YOUR error page)
-        print "http://www.merchant.com/error.html";
+        print "http://192.168.10.130/teilnehmen/horst-2133155758508/error";
     }
 }
 ?>

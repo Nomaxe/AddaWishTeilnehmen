@@ -116,7 +116,7 @@ class Security
 
     private function isEuro($variable)
     {
-        return is_numeric($variable);
+        return is_numeric($variable) && $variable * 100 % 1 == 0;
     }
 
     private function setTrue($array)

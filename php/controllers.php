@@ -8,7 +8,7 @@ require_once ('classes/KreditKarte.php');
 
 use Symfony\Component\HttpFoundation\Request;
 
-function teilnehmen($poolurl, $request)
+function teilnehmen($poolurl, $request, $success, $error)
 {
     $security = new Security();
     $pool = getPoolData($poolurl . ".html");

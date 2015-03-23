@@ -1,4 +1,6 @@
 <?php
+use Symfony\Component\HttpFoundation\Request;
+
 function openDatabase()
 {
     $link = mysqli_connect("localhost", "root", "root123", "addawish");
@@ -49,9 +51,23 @@ function getPoolData($url)
     $rowBild = mysqli_fetch_object($resultBild);
 
     $pool = new Pool();
-    $pool->setData($rowPool->cp_id, $url, $rowPool->cp_name, "../../media/catalog/product" . $rowBild->value, $name[0] . " " . $name[1], $rowPool->cp_message, $rowPool->cp_datetillsuccess, $rowPool->cp_current_amount, $rowPool->cp_teilbetrag, $rowPool->cp_summe);
+    $pool->setData($rowPool->cp_id, $url, $rowPool->cp_name, "../../../media/catalog/product" . $rowBild->value, $name[0] . " " . $name[1], $rowPool->cp_message, $rowPool->cp_datetillsuccess, $rowPool->cp_current_amount, $rowPool->cp_teilbetrag, $rowPool->cp_summe);
 
     closeDatabase($link);
 
     return $pool;
+}
+
+function writeTeilnehmen($request)
+{
+    $link = openDatabase();
+
+    $sql = "UPDATE crowdproject
+            SET cp_current_amount = cp_current_amount + " . $request->request->get('PRESENTATION.AMOUNT') . ",
+                cp_order_number = cp_order_number = ,500;
+            WHERE cp_id = '" . $request->request->get('ACCOUNT.IDENTIFICATION') . "'";
+    mysqli_query($link, $sql);
+
+
+    closeDatabase($link);
 }
