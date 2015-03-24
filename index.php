@@ -14,6 +14,7 @@ if ($uri[0] == '/' && substr_count($uri, '/') <= 2 && strlen($uri) > 1)
 
     if (substr_count($uri, '/') == 2 && substr($uri, strlen($uri) - 7, strlen($uri)) == "success")
     {
+        writeTeilnehmen($request);
         echo "<h1>Success</h1>";
     }
     else if (substr_count($uri, '/') == 2 && substr($uri, strlen($uri) - 5, strlen($uri)) == "error")

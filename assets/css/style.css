@@ -370,7 +370,7 @@ body
     #bezahlArten ul li label img
     {
         height: 40px;
-        width: 45px;
+        width: 44px;
     }
 }
 
@@ -379,7 +379,7 @@ body
     #bezahlArten ul li label img
     {
         height: 40px;
-        width: 55px;
+        width: 54px;
     }
 }
 
@@ -407,7 +407,7 @@ body
     #bezahlArten ul li label img
     {
         height: 40px;
-        width: 50px;
+        width: 49px;
     }
 }
 
@@ -416,7 +416,7 @@ body
     #bezahlArten ul li label img
     {
         height: 40px;
-        width: 53px;
+        width: 50px;
     }
 }
 
@@ -424,8 +424,8 @@ body
 {
     #bezahlArten ul li label img
     {
-        height: 40px;
-        width: 60px;
+        height: 39px;
+        width: 59px;
     }
 }
 
@@ -433,7 +433,7 @@ body
 {
     #pool #countdown .rechts
     {
-        /*padding-left: 7.5%;*/padding-left: 7.5%;
+        padding-left: 7.5%;
         padding-right: 2.2%;
     }
 

@@ -125,6 +125,7 @@ class Teilnehmer
         {
             $parameters['PAYMENT.CODE'] = "VA.DB";
             $parameters['ACCOUNT.BRAND'] = "PAYPAL";
+            $parameters['FRONTEND.ENABLED'] = "true";
         }
         else if ($this->bezahlArt == 'sofortueberweisung')
         {
@@ -134,6 +135,7 @@ class Teilnehmer
             $parameters['ACCOUNT.BANK'] = $this->getUeberweisungBLZ();
             $parameters['ACCOUNT.IBAN'] = $this->getUeberweisungNummer();
             $parameters['ACCOUNT.BIC'] = "12345678";
+            $parameters['FRONTEND.ENABLED'] = "true";
         }
         else if ($this->bezahlArt == 'visa')
         {
@@ -141,9 +143,11 @@ class Teilnehmer
             $parameters['ACCOUNT.HOLDER'] = $this->visa->getInhaber();
             $parameters['ACCOUNT.BRAND'] = "VISA";
             $parameters['ACCOUNT.NUMBER'] = $this->visa->getNummer();
-            $parameters['ACCOUNT.EXPIRY_MONTH'] = "09";
-            $parameters['ACCOUNT.EXPIRY_YEAR'] = "2015";
+            $parameters['ACCOUNT.EXPIRY_MONTH'] = $this->visa->getMonat();
+
+            $parameters['ACCOUNT.EXPIRY_YEAR'] = $this->visa->getJahr();
             $parameters['ACCOUNT.VERIFICATION'] = $this->visa->getPruefnummer();
+            $parameters['FRONTEND.ENABLED'] = "true";
         }
         else if ($this->bezahlArt == 'mastercard')
         {
@@ -154,6 +158,7 @@ class Teilnehmer
             $parameters['ACCOUNT.EXPIRY_MONTH'] = $this->mastercard->getMonat();
             $parameters['ACCOUNT.EXPIRY_YEAR'] = $this->mastercard->getJahr();
             $parameters['ACCOUNT.VERIFICATION'] = $this->mastercard->getPruefnummer();
+            $parameters['FRONTEND.ENABLED'] = "true";
         }
 
         return $parameters;

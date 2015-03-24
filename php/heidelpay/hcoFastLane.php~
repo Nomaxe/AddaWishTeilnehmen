@@ -9,27 +9,31 @@ $parameters['TRANSACTION.CHANNEL'] = "31HA07BC81A71E2A47DA94B6ADC524D8";
 
 $parameters = $teilnehmer->setHeidelpayData($parameters);
 
+$parameters['PRESENTATION.CURRENCY'] = "EUR";
 
 //Response URL angeben
-$parameters['FRONTEND.RESPONSE_URL'] = "http://192.168.178.43/teilnehmen/index.php/victoria-1126161011157/success";
+$parameters['FRONTEND.RESPONSE_URL'] = "http://192.168.10.130/teilnehmen/php/heidelpay/response-page.php";
 
-$parameters['PRESENTATION.CURRENCY'] = "EUR";
+
 $parameters['PRESENTATION.AMOUNT'] = $teilnehmer->getTeilbetrag();
+//$parameters['PRESENTATION.AMOUNT'] = '5.2';
 $parameters['IDENTIFICATION.TRANSACTIONID'] = 'Heidelpay Testtransaktion vom: '.date("d.m.y - H:i:s");
 $parameters['PRESENTATION.USAGE'] = 'Testtransaktion vom '.date("d.m.Y");
 
 
 $parameters['FRONTEND.MODE'] = "DEFAULT";
+//$parameters['FRONTEND.MODE'] = "WPF_LIGHT";
 
-// Modus auswählen
+// Modus ausw�hlen
 //$parameters['TRANSACTION.MODE'] = "LIVE";
 //$parameters['TRANSACTION.MODE'] = "INTEGRATOR_TEST";
 $parameters['TRANSACTION.MODE'] = "CONNECTOR_TEST";
 
 
+$parameters['FRONTEND.ENABLED'] = "true";
 $parameters['FRONTEND.POPUP'] = "false";
 //$parameters['FRONTEND.SHOP_NAME'] = '';
-$parameters['FRONTEND.REDIRECT_TIME'] = "0";
+$parameters['FRONTEND.REDIRECT_TIME'] = "1";
 
 
 $parameters['FRONTEND.LANGUAGE_SELECTOR'] = "true";
@@ -37,6 +41,10 @@ $parameters['FRONTEND.LANGUAGE'] = "de";
 
 $parameters['REQUEST.VERSION'] = "1.0";
 
+/*
+$parameters['NAME.GIVEN'] = "";
+$parameters['NAME.FAMILY'] = "";
+*/
 
 $parameters['NAME.GIVEN'] = $teilnehmer->getVorname();
 $parameters['NAME.FAMILY'] = $teilnehmer->getNachname();
@@ -44,7 +52,9 @@ $parameters['ADDRESS.STREET'] = "Musterstrasse 1";
 $parameters['ADDRESS.ZIP'] = "12345";
 $parameters['ADDRESS.CITY'] = "Musterstadt";
 $parameters['ADDRESS.COUNTRY'] = "DE";
+//$parameters['ADDRESS.STATE'] = "";
 $parameters['CONTACT.EMAIL'] = $teilnehmer->getEmail();
+$parameters['ACCOUNT.IDENTIFICATION'] = $pool->getId();
 
 //building the postparameter string to send into the WPF
 
@@ -54,7 +64,7 @@ foreach ($parameters AS $key => $value)
 $strPOST = stripslashes($result);
 
 echo $strPOST;
-
+/*
 //open the request url for the Web Payment Frontend
 
 $cpt = curl_init();
@@ -76,7 +86,6 @@ curl_close($cpt);
 // parse results
 
 $r_arr=explode("&",$curlresultURL);
-
 foreach($r_arr AS $buf)
 {
     $temp=urldecode($buf);
@@ -100,14 +109,14 @@ if ($processingresult=="ACK")
     }
     else // error-code is returned ... failure
     {
-        header("Location: http://127.0.0.1/livesystem/error.php");
-        //print_r($returnvalue);
+        //header("Location: http://127.0.0.1/livesystem/error.php");
+        print_r($returnvalue);
     }
 }// there is a connection-problem to the ctpe server ... redirect to error page (change the URL to YOUR error page)
 else
 {
-    header("Location: http://127.0.0.1/livesystem/connection.php");
+    // header("Location: http://127.0.0.1/livesystem/connection.php");
+    print_r($returnvalue);
     //print_r($returnvalue);
-    //print_r($returnvalue);
-}
+} */
 ?>

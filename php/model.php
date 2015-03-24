@@ -63,9 +63,10 @@ function writeTeilnehmen($request)
     $link = openDatabase();
 
     $sql = "UPDATE crowdproject
-            SET cp_current_amount = cp_current_amount + " . $request->request->get('PRESENTATION.AMOUNT') . ",
-                cp_order_number = cp_order_number = ,500;
-            WHERE cp_id = '" . $request->request->get('ACCOUNT.IDENTIFICATION') . "'";
+            SET cp_current_amount = cp_current_amount + " . 20 . ",
+            cp_order_number = CONCAT(cp_order_number, IF(cp_order_number IS NOT NULL, ', 500', '500'))
+            WHERE cp_id = " . 271;
+    echo $sql;
     mysqli_query($link, $sql);
 
 

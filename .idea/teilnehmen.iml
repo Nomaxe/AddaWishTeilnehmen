@@ -4,22 +4,12 @@
     <content url="file:$MODULE_DIR$/../../..//$MODULE_DIR$" />
     <content url="file:$MODULE_DIR$/../../../192.168.0.17/html/teilnehmen" />
     <content url="file:$MODULE_DIR$/../../../192.168.10.130/html/teilnehmen" />
+    <content url="file:$MODULE_DIR$/../../../192.168.10.131/html/teilnehmen" />
     <content url="file:$MODULE_DIR$/../../../192.168.10.142/html/teilnehmen" />
     <content url="file:$MODULE_DIR$/../../../192.168.178.37/html/teilnehmen" />
     <content url="file:$MODULE_DIR$/../../../192.168.178.41/html/teilnehmen" />
     <content url="file:$MODULE_DIR$/../../../UBUNTU/html/teilnehmen" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
-      <library name="PHARS">
-        <CLASSES>
-          <root url="phar:$MODULE_DIR$/../../../$MODULE_DIR$/../../../$MODULE_DIR$/vendor/symfony/symfony/src/Symfony/Component/DependencyInjection/Tests/Fixtures/includes/ProjectWithXsdExtensionInPhar.phar" />
-        </CLASSES>
-        <SOURCES>
-          <root url="phar:$MODULE_DIR$/../../../$MODULE_DIR$/../../../$MODULE_DIR$/vendor/symfony/symfony/src/Symfony/Component/DependencyInjection/Tests/Fixtures/includes/ProjectWithXsdExtensionInPhar.phar" />
-        </SOURCES>
-      </library>
-    </orderEntry>
   </component>
 </module>
-
