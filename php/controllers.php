@@ -8,7 +8,7 @@ require_once ('classes/KreditKarte.php');
 
 use Symfony\Component\HttpFoundation\Request;
 
-function teilnehmen($poolurl, $request, $success, $error)
+function teilnehmen($poolurl, $request)
 {
     $security = new Security();
     $pool = getPoolData($poolurl . ".html");
@@ -28,5 +28,22 @@ function teilnehmen($poolurl, $request, $success, $error)
             require_once("php/heidelpay/hcoFastLane.php");
         else
             require_once("templates/teilnehmen.php");
+    }
+}
+
+function einladen ($poolurl, $teilbetrag)
+{
+    $security = new Security();
+    $pool = getPoolData($poolurl . ".html");
+    $isLegit = $security->test($pool);
+
+    if ($isLegit && $security->isEuro($teilbetrag))
+    {
+        writeTeilnehmen($poolurl . ".html", $teilbetrag);
+        require_once("templates/success.php");
+    }
+    else
+    {
+        require_once("templates/error.php");
     }
 }

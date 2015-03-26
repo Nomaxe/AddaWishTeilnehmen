@@ -1,0 +1,75 @@
+body
+{
+    background-color: #f0f0f0;
+}
+
+#header
+{
+    padding: 10px;
+    background-color: #f0f0f0;
+}
+
+#vielenDank
+{
+    width: 100%;
+    margin-top: -1px;
+    padding: 10px;
+    text-align: center;
+    background-color: #ee7400;
+}
+
+#freundeEinladen
+{
+    text-align: center;
+}
+
+#startPunkte
+{
+    text-align: center;
+}
+
+#startPunkte img
+{
+    margin: 10px;
+}
+
+.progress
+{
+    position: relative;
+    background: rgba(245, 245, 245, 1);
+    border: 0px solid rgba(245, 245, 245, 1);
+    border-radius: 4px;
+    height: 20px;
+}
+
+.percent
+{
+    display: block;
+    color: black;
+}
+
+#slider .momentan
+{
+    text-align: right;
+    margin-bottom: 0px;
+}
+
+#slider .maximal
+{
+    margin-top: -20px;
+    text-align: right;
+}
+
+.progress-bar-custom
+{
+    background: rgba(137, 189, 35, 1);
+}
+
+.progress-striped .progress-bar-custom
+{
+    background-color: rgba(137, 189, 35, 1);
+    background-image: -webkit-gradient(linear,0 100%,100% 0,color-stop(0.25,rgba(238, 116, 0, 1),color-stop(0.25,transparent),color-stop(0.5,transparent),color-stop(0.5,rgba(238, 116, 0, 1)),color-stop(0.75,rgba(238, 116, 0, 1)),color-stop(0.75,transparent),to(transparent)));
+    background-image: -webkit-linear-gradient(45deg,rgba(238, 116, 0, 1) 25%,transparent 25%,transparent 50%,rgba(238, 116, 0, 1) 50%,rgba(238, 116, 0, 1) 75%,transparent 75%,transparent);
+    background-image: linear-gradient(45deg,rgba(238, 116, 0, 1) 25%,transparent 25%,transparent 50%,rgba(238, 116, 0, 1) 50%,rgba(238, 116, 0, 1) 75%,transparent 75%,transparent);
+    background-size: 40px 40px;
+}

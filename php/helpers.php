@@ -32,3 +32,11 @@ function getZweistellig($variable)
 {
     return intval($variable / 10) . $variable % 10;
 }
+
+function getTeilbetragProzent($erreicht, $ziel, $teilbetrag)
+{
+    if ($erreicht + $teilbetrag > $ziel)
+        return $teilbetrag * 100 / ($erreicht + $teilbetrag) . "%";
+    else
+        return $teilbetrag * 100 / $ziel . "%";
+}

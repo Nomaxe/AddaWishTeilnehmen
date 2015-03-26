@@ -56,7 +56,7 @@ class Pool
 
     function getUrl()
     {
-        return $this->url;
+        return $_SERVER['SERVER_NAME'] . "/teilnehmen/index.php/" . substr($this->url, 0, strlen($this->url) - 5);
     }
 
     function getName()
@@ -107,7 +107,7 @@ class Pool
     function getErreichtProzent($teilbetrag)
     {
         if ($this->erreicht + $teilbetrag > $this->ziel)
-             return $this->erreicht * 100 / ($this->erreicht + $teilbetrag) . "%";
+            return $this->erreicht * 100 / ($this->erreicht + $teilbetrag) . "%";
         else
             return $this->erreicht * 100 / $this->ziel . "%";
     }

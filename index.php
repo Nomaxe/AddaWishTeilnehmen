@@ -14,8 +14,9 @@ if ($uri[0] == '/' && substr_count($uri, '/') <= 2 && strlen($uri) > 1)
 
     if (substr_count($uri, '/') == 2 && substr($uri, strlen($uri) - 7, strlen($uri)) == "success")
     {
-        writeTeilnehmen($request);
-        echo "<h1>Success</h1>";
+        $uri = substr($uri, 1, strlen($uri) - 9);
+        //Später ändern!
+        einladen($uri, 20);
     }
     else if (substr_count($uri, '/') == 2 && substr($uri, strlen($uri) - 5, strlen($uri)) == "error")
     {
@@ -24,7 +25,7 @@ if ($uri[0] == '/' && substr_count($uri, '/') <= 2 && strlen($uri) > 1)
     else
     {
         $uri = substr($uri, 1, strlen($uri));
-        teilnehmen($uri, $request, $success, $error);
+        teilnehmen($uri, $request);
     }
 }
 else

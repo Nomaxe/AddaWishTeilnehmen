@@ -69,54 +69,53 @@ class Security
         return false;
     }
 
-    private function isName($variable)
+    function isName($variable)
     {
         $match = "((\w+) (\w+))";
         return preg_match_all($match, $variable);
     }
 
-    private function isText($variable)
+    function isText($variable)
     {
         return !empty($variable);
     }
 
-    private function isEmail($variable)
+    function isEmail($variable)
     {
         $match = "/(\w+)@(\w+)\.(\w)/";
 
         return preg_match_all($match, $variable);
     }
 
-    private function isUrl($variable)
+    function isUrl($variable)
     {
-        $match = "([0-9a-zA-Z]-(\d+)\.(html))";
-        return preg_match_all($match, $variable);
+        return true;
     }
 
-    private function isPath($variable)
+    function isPath($variable)
     {
         $match = "((/(\w+))*)";
         return preg_match_all($match, $variable);
     }
 
-    private function isNumber($variable)
+    function isNumber($variable)
     {
         return is_numeric($variable);
     }
 
-    private function isMonth($variable)
+    function isMonth($variable)
     {
         return $this->isNumber($variable) && $variable % 1 == 0 && $variable > 0 && $variable < 13;
     }
 
-    private function isYear($variable)
+    function isYear($variable)
     {
         return $this->isNumber($variable) && $variable % 1 == 0;
     }
 
-    private function isEuro($variable)
+    function isEuro($variable)
     {
-        return is_numeric($variable) && $variable * 100 % 1 == 0;
+        return is_numeric($variable) && $variable * 100 % 1 == 0 && $variable > 0;
     }
 
     private function setTrue($array)

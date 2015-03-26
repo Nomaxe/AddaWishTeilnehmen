@@ -58,15 +58,14 @@ function getPoolData($url)
     return $pool;
 }
 
-function writeTeilnehmen($request)
+function writeTeilnehmen($url, $teilbetrag)
 {
     $link = openDatabase();
 
     $sql = "UPDATE crowdproject
-            SET cp_current_amount = cp_current_amount + " . 20 . ",
+            SET cp_current_amount = cp_current_amount + '" . $teilbetrag . "',
             cp_order_number = CONCAT(cp_order_number, IF(cp_order_number IS NOT NULL, ', 500', '500'))
-            WHERE cp_id = " . 271;
-    echo $sql;
+            WHERE cp_url = '" . $url . "'";
     mysqli_query($link, $sql);
 
 
