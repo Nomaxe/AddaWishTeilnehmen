@@ -1,10 +1,13 @@
 <?php
+//Returnt das jetzige Jahr
 function getCurrentYear()
 {
     $timestamp = time();
     return intval(date("Y",$timestamp));
 }
 
+//Zeigt die nächsten Jahre als Option für ein Select an
+//Wenn das Parameter-Jahr mit einem der nächsten Jahre passt, wird dieses angezeigt
 function showYears($year = null)
 {
     $currentYear = getCurrentYear();
@@ -17,6 +20,8 @@ function showYears($year = null)
     }
 }
 
+//Zeigt alle Monate als Option für ein Select an
+//Wenn der Parameter-Monat mit einem Monar übereinstimmt, wird dieser angezeigt
 function showMonths($month = null)
 {
     for ($i = 1; $i < 13; $i++)

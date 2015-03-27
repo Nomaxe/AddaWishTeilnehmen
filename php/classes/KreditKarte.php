@@ -1,4 +1,7 @@
 <?php
+//Speichert alls Daten einer KreditKarte
+//Für Visa und MasterCard
+
 class KreditKarte
 {
     private $nummer;

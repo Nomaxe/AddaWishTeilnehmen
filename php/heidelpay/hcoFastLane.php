@@ -2,17 +2,17 @@
 
 //URL fuer Testsystem
 $url = "https://test-heidelpay.hpcgw.net/sgw/gtw";
+
+//Die Login-Daten für Heidelpay
 $parameters['SECURITY.SENDER'] = "31HA07BC8124AD82A9E96D9A35FAFD2A";
 $parameters['USER.LOGIN'] = "31ha07bc8124ad82a9e96d486d19edaa";
 $parameters['USER.PWD'] = "password";
 $parameters['TRANSACTION.CHANNEL'] = "31HA07BC81A71E2A47DA94B6ADC524D8";
 
+//Die nötigen Daten für die jenige Bezahlmethode
 $parameters = $teilnehmer->setHeidelpayData($parameters);
 
-
-//Response URL angeben
-$parameters['FRONTEND.RESPONSE_URL'] = "http://192.168.178.43/teilnehmen/index.php/victoria-1126161011157/success";
-
+//Der Betrag und die Beschreibung der Zahlung
 $parameters['PRESENTATION.CURRENCY'] = "EUR";
 $parameters['PRESENTATION.AMOUNT'] = $teilnehmer->getTeilbetrag();
 $parameters['IDENTIFICATION.TRANSACTIONID'] = 'Heidelpay Testtransaktion vom: '.date("d.m.y - H:i:s");
@@ -37,7 +37,7 @@ $parameters['FRONTEND.LANGUAGE'] = "de";
 
 $parameters['REQUEST.VERSION'] = "1.0";
 
-
+//Daten des Teilnehmers
 $parameters['NAME.GIVEN'] = $teilnehmer->getVorname();
 $parameters['NAME.FAMILY'] = $teilnehmer->getNachname();
 $parameters['ADDRESS.STREET'] = "Musterstrasse 1";
@@ -107,7 +107,6 @@ if ($processingresult=="ACK")
 else
 {
     header("Location: http://127.0.0.1/livesystem/connection.php");
-    //print_r($returnvalue);
     //print_r($returnvalue);
 }
 ?>

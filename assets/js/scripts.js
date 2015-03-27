@@ -10,7 +10,7 @@ var minuten;
 var sekunden;
 var interval;
 
-//Prohressbar
+//Progressbar
 var knotenProgressbar;
     //1 = Erste Progressbar
     //3 = Zweite Progressbar
@@ -134,6 +134,7 @@ function countDownZaehler()
 
                 if (tage < 0)
                 {
+                    //Wenn Zeit abgelaufen, zeige nur noch 0 an
                     tage = 0;
                     stunden = 0;
                     minuten = 0;
@@ -385,7 +386,7 @@ function isNumber(variable)
 
 function isName(variable)
 {
-    regex = /(\w.+)/;
+    regex = /(\w.+) (\w.+)/;
 
     return variable.match(regex);
 }

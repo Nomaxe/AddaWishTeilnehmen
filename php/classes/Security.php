@@ -1,10 +1,14 @@
 <?php
+//Die Sicherheitsklasse
+//Bekommt ein Objekt und testet alle Variablen durch
+
 class Security
 {
     function test($object)
     {
         if (is_object($object))
         {
+            //Bei einem Pool-Objekt
             if (is_a($object, "Pool"))
             {
                 $isLegit = array(13);
@@ -24,6 +28,9 @@ class Security
 
                 return $this->trueTest($isLegit);
             }
+            //Bei einem Teilnehmer-Objekt
+            //Variablen Prüfung abhängig der gewählten Bezahlart
+            //Wenn keine gewählt, wird false returnt
             else if (is_a($object, "Teilnehmer"))
             {
                 $isLegit = array(10);

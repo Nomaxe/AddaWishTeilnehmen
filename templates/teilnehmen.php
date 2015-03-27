@@ -8,7 +8,7 @@
     <link rel="shortcut icon" href="../assets/bilder/addawish.ico" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../assets/fonts/font-awesome-4.3.0/css/font-awesome.css">
-    <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/teilnehmen.css">
     <script language="JavaScript" type="text/javascript" src="../assets/js/jquery-1.11.2.min.js"></script>
     <script language="JavaScript" type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
     <script language="JavaScript" type="text/javascript" src="../assets/js/scripts.js"></script>
