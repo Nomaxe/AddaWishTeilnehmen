@@ -16,7 +16,7 @@ class Pool
     private $nochMinuten;
     private $nochSekunden;
     private $erreicht;
-    private $teilbetragEmpholen;
+    private $teilbetragEmpfohlen;
     private $ziel;
 
     //Schreibt alle Daten in das Pool-Objekt
@@ -28,7 +28,7 @@ class Pool
     //$beschreibung         Beschreibung des Pools
     //&deadline             Die Deadline als Datum (Muss für die date-Klasse von php als Datum erkennbar sein)
     //$erreicht             Der momentan erreichte Betrag
-    //$teilbetragEmpholen   Der vom Initiator empholenen Teilbetrag
+    //$teilbetragEmpfohlen   Der vom Initiator empholenen Teilbetrag
     //$ziel                 Der gewünschte Ziel-Betrag
     function setData($id, $url, $name, $bildPfad, $initiator, $beschreibung, $deadline, $erreicht, $teilbetragEmpholen, $ziel)
     {
@@ -41,7 +41,7 @@ class Pool
         $this->beschreibung = $beschreibung;
         $this->deadline = $deadline;
         $this->erreicht = $erreicht;
-        $this->teilbetragEmpholen = $teilbetragEmpholen;
+        $this->teilbetragEmpfohlen = $teilbetragEmpholen;
         $this->ziel = $ziel;
 
         //Generiert jetzige Datm
@@ -142,7 +142,7 @@ class Pool
 
     function getTeilbetrag()
     {
-        return $this->teilbetragEmpholen;
+        return $this->teilbetragEmpfohlen;
     }
 
     function getZiel()

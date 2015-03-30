@@ -20,7 +20,7 @@ class Teilnehmer
 
     //Weist alle Daten dem Objekt zu
     //$request              Das Request Object von Symfony, um an alle Post-Parameter zu kommen
-    //$teilbetragEmpholen   Der vo Initiator empholenen Teilbetrag
+    //$teilbetragEmpfohlen   Der vo Initiator empholenen Teilbetrag
     function setData($request, $empholenerTeilbetrag)
     {
         //Daten werden zugewiesen

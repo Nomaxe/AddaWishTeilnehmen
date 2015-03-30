@@ -17,7 +17,9 @@ function teilnehmen($poolurl, $request)
     //Erstellt Pool-Objekt abhängig von der eigegeben URL
     //.Html muss drangehangen werden, da so in der Datenbank gespeichert
     //Das passende Pool-Objekt wird von der Funktion getPoolData returnt (zufinden in der model.php)
-    $pool = getPoolData($poolurl . ".html");
+    $poolurl = $poolurl . ".html";
+    //echo $poolurl;
+    $pool = getPoolData($poolurl);
     $isLegit = $security->test($pool);
 
     //Wenn nicht alle Pool-Daten vorhanden

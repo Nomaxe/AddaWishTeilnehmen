@@ -60,9 +60,12 @@ function getPoolData($url)
     $resultBild = mysqli_query($link, $sql);
     $rowBild = mysqli_fetch_object($resultBild);
 
+    //Den Bildpfad ändern
+    $bildpfad = "../../../media/catalog/product" . $rowBild->value;
+
     //Erstellt Pool und weist dem Object alle Daten zu
     $pool = new Pool();
-    $pool->setData($rowPool->cp_id, $url, $rowPool->cp_name, "../../../media/catalog/product" . $rowBild->value, $name[0] . " " . $name[1], $rowPool->cp_message, $rowPool->cp_datetillsuccess, $rowPool->cp_current_amount, $rowPool->cp_teilbetrag, $rowPool->cp_summe);
+    $pool->setData($rowPool->cp_id, $url, $rowPool->cp_name, $bildpfad, $name[0] . " " . $name[1], $rowPool->cp_message, $rowPool->cp_datetillsuccess, $rowPool->cp_current_amount, $rowPool->cp_teilbetrag, $rowPool->cp_summe);
 
     //Schließt Datenbank-Verbindung
     closeDatabase($link);
